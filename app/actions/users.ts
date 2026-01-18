@@ -146,5 +146,22 @@ export async function getUsers(filters?: { role?: UserRole; isActive?: boolean }
 export async function getUser(userId: string) {
   await connectDB()
   const user = await User.findById(userId).select("-password").lean()
-  return user
+  
+  if (!user) {
+    return null
+  }
+
+  // Transform user to ensure _id is string and all fields are plain objects
+  return {
+    _id: user._id.toString(),
+    name: user.name,
+    email: user.email,
+    role: user.role,
+    phone: user.phone || undefined,
+    address: user.address || undefined,
+    isActive: user.isActive,
+    lastLogin: user.lastLogin ? new Date(user.lastLogin).toISOString() : undefined,
+    createdAt: user.createdAt.toISOString(),
+    updatedAt: user.updatedAt.toISOString(),
+  }
 }

@@ -16,20 +16,28 @@ async function DashboardContent() {
   const stats = await getDashboardStats()
 
   return (
-    <div className="space-y-6">
-      <div>
-        <h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
-        <p className="text-muted-foreground">Welcome back! Here's what's happening today.</p>
+    <div className="space-y-8 animate-fade-in-up">
+      <div className="space-y-2">
+        <h1 className="text-4xl font-extrabold tracking-tight bg-gradient-to-r from-foreground via-foreground/90 to-foreground/70 bg-clip-text text-transparent">
+          Dashboard
+        </h1>
+        <p className="text-lg text-muted-foreground font-medium">Welcome back! Here's what's happening today.</p>
       </div>
 
       <DashboardStats stats={stats} />
 
       <div className="grid gap-6 md:grid-cols-2">
-        <RevenueChart />
-        <OccupancyChart />
+        <div className="animate-fade-in-up" style={{ animationDelay: "500ms" }}>
+          <RevenueChart />
+        </div>
+        <div className="animate-fade-in-up" style={{ animationDelay: "600ms" }}>
+          <OccupancyChart />
+        </div>
       </div>
 
-      <RecentBookings />
+      <div className="animate-fade-in-up" style={{ animationDelay: "700ms" }}>
+        <RecentBookings />
+      </div>
     </div>
   )
 }

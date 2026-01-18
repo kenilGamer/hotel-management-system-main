@@ -1,8 +1,8 @@
 import { requireAuth } from "@/lib/auth-utils"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { signOut } from "next-auth/react"
-import { LogOut, User, Calendar, Bed } from "lucide-react"
+import { User, Calendar, Bed } from "lucide-react"
+import { SignOutButton } from "@/components/layout/sign-out-button"
 
 export default async function CustomerLayout({
   children,
@@ -37,15 +37,7 @@ export default async function CustomerLayout({
                 Profile
               </Link>
             </Button>
-            <form action={async () => {
-              "use server"
-              await signOut({ redirectTo: "/signin" })
-            }}>
-              <Button type="submit" variant="ghost">
-                <LogOut className="mr-2 h-4 w-4" />
-                Sign Out
-              </Button>
-            </form>
+            <SignOutButton />
           </nav>
         </div>
       </header>
